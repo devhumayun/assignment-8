@@ -1,11 +1,13 @@
 "use client";
 
 import { userLogin } from "@/app/actions";
+import { useAuth } from "@/app/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const LoginForm = () => {
     const [error, setError] = useState("");
+    const { setAuth } = useAuth()
     const router = useRouter()
     const handlelogin = async (e) => {
         e.preventDefault();
@@ -15,6 +17,7 @@ const LoginForm = () => {
             const user = await userLogin(formData);
 
             if (user) {
+                setAuth(user)
                 router.push("/")
             } else {
                 setError("Invalid email or password");

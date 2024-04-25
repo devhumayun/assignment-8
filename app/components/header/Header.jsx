@@ -1,6 +1,7 @@
 import logo from '@/public/images/logo.png'
 import Image from "next/image"
 import Link from "next/link"
+import LoginAndLogout from './LoginAndLogout'
 const Header = () => {
     return (
         <nav>
@@ -24,9 +25,7 @@ const Header = () => {
                     <li className="py-2">
                         <Link href="/about">About us</Link>
                     </li>
-                    <li className="py-2 bg-[#eb4a36] px-6 rounded-md text-white content-center">
-                        <Link href="/login">Login</Link>
-                    </li>
+                    <LoginAndLogout />
                 </ul>
             </div>
         </nav>
