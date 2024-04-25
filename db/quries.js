@@ -1,4 +1,5 @@
 import { recipesModel } from "@/models/recipe-models";
+import { usersModel } from "@/models/users.model";
 import {
   replaceMongoIdInArray,
   replaceMongoIdInObject,
@@ -26,5 +27,31 @@ export const getRecipeById = async (id) => {
     return replaceMongoIdInObject(recipe);
   } catch (err) {
     throw err;
+  }
+};
+
+/**
+ * create new user
+ */
+export const createUser = async (user) => {
+  try {
+    return await usersModel.create(user);
+  } catch (error) {
+    throw error;
+  }
+};
+
+/**
+ * login
+ */
+export const userLoginByCredentials = async (credentials) => {
+  try {
+    const user = await usersModel.findOne(credentials).lean();
+    if (user) {
+      return replaceMongoIdInObject(user);
+    }
+    return null;
+  } catch (error) {
+    console.log(error);
   }
 };
