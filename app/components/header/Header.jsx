@@ -14,7 +14,7 @@ const Header = () => {
                         width={150}
                     />
                 </Link>
-                <ul className="flex gap-4 text-sm text-gray-500">
+                <ul className="flex gap-4 text-sm text-gray-500 items-center">
                     <li className="py-2 active">
                         <Link href="/">Home</Link>
                     </li>
