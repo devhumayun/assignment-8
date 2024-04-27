@@ -11,7 +11,7 @@ const RecipeCategories = async () => {
                     categories ? (
                         categories.map((category) => (
                             <li key={category}>
-                                <Link href="#">{category}</Link>
+                                <Link href={`/category/${category}`}>{category}</Link>
                             </li>
                         ))
                     ) : (<p> No Category found </p>)

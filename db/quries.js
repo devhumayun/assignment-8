@@ -81,6 +81,9 @@ export const favouriteToggle = async (recipeId, userId) => {
   }
 };
 
+/**
+ * get all categories
+ */
 export const allCategories = async () => {
   const recipes = await getAllRecipes();
   const categoriesSet = new Set(); // Using a Set to automatically handle uniqueness
@@ -88,4 +91,24 @@ export const allCategories = async () => {
     categoriesSet.add(recipe.category); // Add each recipe's category to the Set
   });
   return Array.from(categoriesSet);
+};
+/**
+ * get category by name
+ */
+export const getCategoryByName = async (categoryName) => {
+  try {
+    const categories = await recipesModel.find().lean();
+
+    const category = categories.filter(
+      (catName) => catName.category === categoryName
+    );
+
+    if (!category) {
+      throw new Error(`No recipe available with this category`);
+    }
+
+    return category;
+  } catch (error) {
+    console.log(error);
+  }
 };
