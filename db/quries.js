@@ -80,3 +80,12 @@ export const favouriteToggle = async (recipeId, userId) => {
     console.log(error);
   }
 };
+
+export const allCategories = async () => {
+  const recipes = await getAllRecipes();
+  const categoriesSet = new Set(); // Using a Set to automatically handle uniqueness
+  recipes.forEach((recipe) => {
+    categoriesSet.add(recipe.category); // Add each recipe's category to the Set
+  });
+  return Array.from(categoriesSet);
+};

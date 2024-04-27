@@ -2,6 +2,17 @@ import RecipeAction from "@/app/components/recipe/RecipeAction";
 import { getRecipeById } from "@/db/quries";
 import Image from "next/image";
 
+export async function generateMetadata({ params: { id } }) {
+  const recipe = await getRecipeById(id);
+  return {
+    title: `LWS - ${recipe?.name}`,
+    description: recipe?.description,
+    openGraph: {
+      images: recipe?.thumbnail,
+    },
+  };
+}
+
 const RecipeDetailsPage = async ({ params: { id } }) => {
   const recipe = await getRecipeById(id);
   return (
@@ -98,7 +109,7 @@ const RecipeDetailsPage = async ({ params: { id } }) => {
                 <p className="text-gray-500 text-sm">{recipe?.serves}</p>
               </div>
             </div>
-            <RecipeAction recipeId={recipe?.id} />
+            <RecipeAction recipe={recipe} />
           </div>
         </div>
       </section>

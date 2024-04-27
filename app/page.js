@@ -2,7 +2,7 @@ import HeroSection from "./components/home/HeroSection";
 import RecipeCategories from "./components/home/RecipeCategories";
 import RecipeList from "./components/recipe/RecipeList";
 
-export default function Home() {
+export default async function Home() {
   return (
     <main>
       <section className="container">
