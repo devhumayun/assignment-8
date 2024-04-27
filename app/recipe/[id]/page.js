@@ -98,7 +98,7 @@ const RecipeDetailsPage = async ({ params: { id } }) => {
                 <p className="text-gray-500 text-sm">{recipe?.serves}</p>
               </div>
             </div>
-            <RecipeAction />
+            <RecipeAction recipeId={recipe?.id} />
           </div>
         </div>
       </section>

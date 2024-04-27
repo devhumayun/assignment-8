@@ -55,3 +55,28 @@ export const userLoginByCredentials = async (credentials) => {
     console.log(error);
   }
 };
+
+/**
+ * recipe favourite toggle functionlity
+ */
+export const favouriteToggle = async (recipeId, userId) => {
+  try {
+    const recipe = await recipesModel.findById(recipeId);
+    const user = await usersModel.findById(userId);
+
+    const index = user.favourites.indexOf(recipeId);
+    if (index === -1) {
+      user.favourites.push(recipeId);
+      console.log("Favourite added");
+    } else {
+      user.favourites.splice(index, 1);
+      console.log("Favourite removed");
+    }
+
+    await user.save();
+
+    console.log("User saved successfully");
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -1,5 +1,9 @@
 "use server";
-import { createUser, userLoginByCredentials } from "@/db/quries";
+import {
+  createUser,
+  favouriteToggle,
+  userLoginByCredentials,
+} from "@/db/quries";
 import { redirect } from "next/navigation";
 
 export const userRegister = async (formData) => {
@@ -17,6 +21,14 @@ export const userLogin = async (formData) => {
     const user = await userLoginByCredentials(credentails);
 
     return user;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const addOrRemoveFavourite = async (recipeId, userId) => {
+  try {
+    return await favouriteToggle(recipeId, userId);
   } catch (error) {
     throw error;
   }
