@@ -1,6 +1,7 @@
 import RecipeAction from "@/app/components/recipe/RecipeAction";
 import { getRecipeById } from "@/db/quries";
 import Image from "next/image";
+import Link from "next/link";
 
 export async function generateMetadata({ params: { id } }) {
   const recipe = await getRecipeById(id);
@@ -32,9 +33,12 @@ const RecipeDetailsPage = async ({ params: { id } }) => {
             <h2 className="font-semibold text-4xl lg:w-8/12 leading-10">
               {recipe?.name}
             </h2>
-            <p className="text-xs text-[#eb4a36] italic my-2">
+            <Link
+              href={`/category/${recipe?.category}`}
+              className="text-xs text-[#eb4a36] italic my-2"
+            >
               {recipe?.category}
-            </p>
+            </Link>
             <p className="text-gray-600 text-sm my-6 leading-6">
               {recipe?.description}
             </p>
