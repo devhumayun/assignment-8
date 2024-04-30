@@ -1,9 +1,13 @@
 import RecipeAction from "@/app/components/recipe/RecipeAction";
 import { getRecipeById } from "@/db/quries";
+import { recipesModel } from "@/models/recipe-models";
+import { dbConnect } from "@/services/database";
 import Image from "next/image";
 import Link from "next/link";
 
 export async function generateMetadata({ params: { id } }) {
+  await dbConnect();
+  await recipesModel.find();
   const recipe = await getRecipeById(id);
   return {
     title: `LWS - ${recipe?.name}`,

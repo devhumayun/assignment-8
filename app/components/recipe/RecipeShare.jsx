@@ -15,14 +15,14 @@ const RecipeShare = ({ recipe }) => {
             <div className='flex gap-1 items-center'>
 
                 <FacebookShareButton
-                    url={"https://learnwithsumit.com/"}
+                    url={"https://assignment-8-pi.vercel.app/"}
                     quote={'Share my recipe'}
                     hashtag={"#recipe"}
                     media={imageUrl}
                 >
                     <FacebookIcon size={28} round />
                 </FacebookShareButton>
-                <LinkedinShareButton url={'https://learnwithsumit.com/'}>
+                <LinkedinShareButton url={'https://assignment-8-pi.vercel.app/'}>
                     <LinkedinIcon size={28} round />
                 </LinkedinShareButton>
             </div>
