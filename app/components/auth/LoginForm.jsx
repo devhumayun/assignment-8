@@ -7,10 +7,12 @@ import { useState } from "react";
 
 const LoginForm = () => {
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false)
     const { setAuth } = useAuth()
     const router = useRouter()
     const handlelogin = async (e) => {
         e.preventDefault();
+        setLoading(true)
         const currentTarget = e.currentTarget;
         try {
             const formData = new FormData(currentTarget);
@@ -19,11 +21,14 @@ const LoginForm = () => {
             if (user) {
                 setAuth(user)
                 router.push("/")
+                setLoading(false)
             } else {
                 setError("Invalid email or password");
+                setLoading(false)
             }
         } catch (err) {
             setError(err.message);
+            setLoading(false)
         }
     };
 
@@ -43,7 +48,7 @@ const LoginForm = () => {
                     type="submit"
                     className="bg-[#eb4a36] py-3 rounded-md text-white w-full mt-4"
                 >
-                    Login
+                    {loading ? "Logging" : "Login"}
                 </button>
             </form>
         </>
