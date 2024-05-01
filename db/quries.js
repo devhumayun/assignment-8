@@ -23,7 +23,6 @@ export const getAllRecipes = async () => {
 export const getRecipeById = async (id) => {
   try {
     const recipe = await recipesModel.findById(id).lean();
-
     return replaceMongoIdInObject(recipe);
   } catch (err) {
     throw err;

@@ -1,8 +1,22 @@
+"use client"
 import { userRegister } from "@/app/actions"
+import { useState } from "react"
 
 const RegisterForm = () => {
+    const [error, setError] = useState(null)
+    const [loading, setLoading] = useState(false)
+    const handleRegister = async (formData) => {
+        try {
+            setLoading(true)
+            await userRegister(formData)
+            setLoading(false)
+        } catch (error) {
+            setLoading(false)
+            setError(error)
+        }
+    }
     return (
-        <form className="login-form" action={userRegister}>
+        <form className="login-form" action={handleRegister}>
             <div>
                 <label htmlFor="fname">First Name</label>
                 <input type="text" name="fname" id="fname" />
@@ -23,7 +37,7 @@ const RegisterForm = () => {
                 type="submit"
                 className="bg-[#eb4a36] py-3 rounded-md text-white w-full mt-4"
             >
-                Create Account
+                {loading ? "Creating account..." : "Create Account"}
             </button>
         </form>
     )
