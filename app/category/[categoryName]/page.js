@@ -10,39 +10,21 @@ const CategoryPage = async ({ params: { categoryName } }) => {
   const catName = categoryName.split("%20%26%20").join(" & ");
   const recipes = await getCategoryByName(catName);
 
-  // let categoryContent;
-  // if (recipes == []) {
-  //   categoryContent = (
-  //     <>
-  //       <div>
-  //         <p>No recipe found with this category</p>
-  //       </div>
-  //     </>
-  //   );
-  // } else {
-  //   categoryContent = (
-  //     <>
-  //       {recipes.map((recipe) => (
-  //         <div key={recipe?.id} className="card">
-  //           <Link href={`/recipe/${recipe._id}`}>
-  //             <Image
-  //               src={recipe?.thumbnail}
-  //               className="rounded-md"
-  //               alt={recipe?.name}
-  //               width={500}
-  //               height={500}
-  //             />
-  //             <h4 className="my-2">{recipe?.name}</h4>
-  //             <div className="py-2 flex justify-between text-xs text-gray-500">
-  //               <span>⭐️ {recipe?.rating}</span>
-  //               <span>By: {recipe?.author}</span>
-  //             </div>
-  //           </Link>
-  //         </div>
-  //       ))}
-  //     </>
-  //   );
-  // }
+  if (!recipes || recipes.length === 0) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="bg-slate-200 p-10 shadow-md rounded-md flex flex-col gap-3 items-center">
+          <h3>
+            No recipes found with the category:{" "}
+            <span className="text-red-500">{catName}</span>{" "}
+          </h3>
+          <Link className="bg-red-500 mt-3 p-2 text-white rounded-md" href="/">
+            Go back!
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <main>

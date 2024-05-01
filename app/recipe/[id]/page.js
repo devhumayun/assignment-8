@@ -20,6 +20,22 @@ export async function generateMetadata({ params: { id } }) {
 
 const RecipeDetailsPage = async ({ params: { id } }) => {
   const recipe = await getRecipeById(id);
+  if (!recipe) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="bg-slate-200 p-10 shadow-md rounded-md flex flex-col gap-3 items-center">
+          <h3>
+            Recipe not found with this id:{" "}
+            <span className="text-red-500">{id}</span>{" "}
+          </h3>
+          <Link className="bg-red-500 mt-3 p-2 text-white rounded-md" href="/">
+            Go back!
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <main>
       <section>

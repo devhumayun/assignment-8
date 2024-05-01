@@ -23,9 +23,13 @@ export const getAllRecipes = async () => {
 export const getRecipeById = async (id) => {
   try {
     const recipe = await recipesModel.findById(id).lean();
+    if (!recipe) {
+      throw new Error("Recipe not found");
+    }
     return replaceMongoIdInObject(recipe);
   } catch (err) {
-    throw err;
+    console.error("Error fetching recipe:", err);
+    return null;
   }
 };
 
@@ -102,12 +106,13 @@ export const getCategoryByName = async (categoryName) => {
       (catName) => catName.category === categoryName
     );
 
-    if (!category) {
+    if (!category.length === 0) {
       throw new Error(`No recipe available with this category`);
     }
 
     return category;
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    return null;
   }
 };
